@@ -15,22 +15,23 @@
         android:text="Num 1:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.169" />
+        app:layout_constraintVertical_bias="0.14" />
 
     <EditText
         android:id="@+id/txtNum1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="85dp"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="48dp"
         android:hint="Escribe un numero"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.04" />
+        app:layout_constraintVertical_bias="0.0" />
+
 
     <TextView
         android:id="@+id/lblNum2"
@@ -39,10 +40,10 @@
         android:text="Num 2:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24" />
+        app:layout_constraintVertical_bias="0.196" />
 
     <EditText
         android:id="@+id/txtNum2"
@@ -52,9 +53,8 @@
         android:hint="Escribe un numero"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139"
-        tools:layout_editor_absoluteX="64dp" />
-
+        app:layout_constraintVertical_bias="0.107"
+        tools:layout_editor_absoluteX="72dp" />
 
     <TextView
         android:id="@+id/txtRespuesta"
@@ -63,10 +63,10 @@
         android:text="Respuesta:?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintHorizontal_bias="0.408"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.332" />
+        app:layout_constraintVertical_bias="0.271" />
 
     <RadioGroup
         android:id="@+id/optOpciones"
@@ -75,16 +75,16 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.883"
+        app:layout_constraintHorizontal_bias="0.903"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.417">
+        app:layout_constraintVertical_bias="0.386">
 
         <RadioButton
             android:id="@+id/optSuma"
-            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="Suma" />
 
         <RadioButton
@@ -106,10 +106,22 @@
             android:text="Dividir" />
 
         <RadioButton
-            android:id="@+id/optFactorial"
+            android:id="@+id/optPorcentaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Factorial" />
+            android:text="Porcentaje" />
+
+        <RadioButton
+            android:id="@+id/optExponente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exponente" />
+
+        <RadioButton
+            android:id="@+id/optRaiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Raiz" />
     </RadioGroup>
 
     <Button
@@ -119,8 +131,8 @@
         android:text="CALCULAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNum2"
-        app:layout_constraintVertical_bias="0.461"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintVertical_bias="0.646"
+        tools:layout_editor_absoluteX="0dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
