@@ -1,66 +1,15 @@
 <resources>
     <string name="app_name">Calculadora Basica</string>
-    <string-array name="monedas">
-        <item>Dólar (USD)</item>
-        <item>Euro (EUR)</item>
-        <item>Quetzal (GTQ)</item>
-        <item>Lempira (HNL)</item>
-        <item>Córdoba (NIO)</item>
-        <item>Colón CR (CRC)</item>
-        <item>Peso Mexicano (MXN)</item>
-        <item>Libra Esterlina (GBP)</item>
-        <item>Yen Japonés (JPY)</item>
-        <item>Dólar Canadiense (CAD)</item>
-        <item>Franco Suizo (CHF)</item>
-        <item>Yuan Chino (CNY)</item>
+    <string-array name="Area">
+        <item>Pie Cuadrado</item>
+        <item>Vara Cuadrada</item>
+        <item>Yarda Cuadrada</item>
+        <item>Metro Cuadrado</item>
+        <item>Tareas</item>
+        <item>Manzana</item>
+        <item>Hectárea</item>
     </string-array>
-    <string-array name="Logitudes">
-        <item>Metro</item>
-        <item>Kilómetro</item>
-        <item>Centímetro</item>
-        <item>Milímetro</item>
-        <item>Milla</item>
-        <item>Pulgada</item>
-        <item>Pie</item>
-    </string-array>
-    <string-array name="volumenes">
-    <item>Litro</item>
-    <item>Mililitro</item>
-    <item>Galón</item>
-    </string-array>
-    <string-array name="masas">
-        <item>Kilogramo</item>
-        <item>Gramo</item>
-        <item>Libra</item>
-        <item>Onza</item>
-        <item>Tonelada</item>
-    </string-array>
-    <string-array name="almacenamiento">
-        <item>Byte</item>
-        <item>Kilobyte (KB)</item>
-        <item>Megabyte (MB)</item>
-        <item>Gigabyte (GB)</item>
-        <item>Terabyte (TB)</item>
-        <item>Bit</item>
-    </string-array>
-    <string-array name="tiempo">
-        <item>Segundo</item>
-        <item>Minuto</item>
-        <item>Hora</item>
-        <item>Día</item>
-        <item>Semana</item>
-        <item>Mes</item>
-        <item>Año</item>
-        <item>Milisegundo</item>
-    </string-array>
-    <string-array name="transferencia">
-        <item>bps (bit/s)</item>
-        <item>Kbps (Kilobit/s)</item>
-        <item>Mbps (Megabit/s)</item>
-        <item>Gbps (Gigabit/s)</item>
-        <item>Bps (Byte/s)</item>
-        <item>KBps (KB/s)</item>
-        <item>MBps (MB/s)</item>
-    </string-array>
+
+
 
 </resources>
