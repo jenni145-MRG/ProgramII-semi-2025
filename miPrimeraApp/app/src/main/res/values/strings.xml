@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Calculadora Basica</string>
+    <string name="app_name">Parcial ConversorArea</string>
     <string-array name="tipo">
-        <item>Moneda</item>
+        <item>Area</item>
         <item>Masa</item>
         <item>Volumen</item>
         <item>Longitud</item>
