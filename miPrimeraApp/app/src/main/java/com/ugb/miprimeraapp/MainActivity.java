@@ -1,79 +1,69 @@
-package com.ugb.miprimeraapp;
 
+
+import static android.os.Build.VERSION_CODES_FULL.R;
+
+import miPrimeraApp.R;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.RadioButton;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TabHost;
 import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    TabHost tbh;
     TextView tempVal;
+    Spinner spn;
     Button btn;
-    RadioButton opt;
+
+    String[] Area = {"Pie Cuadrado", "Vara Cuadrada", "Yarda Cuadrada", "Metro Cuadrado", "Tareas", "Manzana", "Hectárea"};
+    Double valores[] = new Double[]{0.092903, 0.69874, 0.836127, 1.0, 437.5, 7000.0, 10000.0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        btn = findViewById(R.id.btnCalcular);
-        btn.setOnClickListener(v -> calcular());
+        tbh = findViewById(R.id.tbhConversores);
+        tbh.setup();
 
+        TabHost.TabSpec tsArea = tbh.newTabSpec("Area");
+        tsArea.setContent(R.id.tabArea);
+        tsArea.setIndicator("ÁREA");
+        tbh.addTab(tsArea);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, Area);
+
+        spn = findViewById(R.id.spnAreaDe);
+        spn.setAdapter(adapter);
+
+        Spinner spnA = findViewById(R.id.spnAreaA);
+        spnA.setAdapter(adapter);
+
+        btn = findViewById(R.id.btnAreaConvertir);
+        btn.setOnClickListener(v -> convertirArea());
     }
 
-    private void calcular() {
-        tempVal = findViewById(R.id.txtNum1);
-        Double Num1 = Double.parseDouble(tempVal.getText().toString());
+    private void convertirArea() {
+        spn = findViewById(R.id.spnAreaDe);
+        int de = spn.getSelectedItemPosition();
 
-        tempVal = findViewById(R.id.txtNum2);
-        Double Num2 = Double.parseDouble(tempVal.getText().toString());
+        Spinner spnDestino = findViewById(R.id.spnAreaA);
+        int a = spnDestino.getSelectedItemPosition();
 
-        double respuesta = 0;
+        tempVal = findViewById(R.id.txtAreaCantidad);
+        double cantidad = Double.parseDouble(tempVal.getText().toString());
 
-        opt=findViewById(R.id.optSuma);
-        if(opt.isChecked()){
-            respuesta= Num1 + Num2;
-        }
+        double respuesta = conversor(de, a, cantidad);
 
-        opt=findViewById(R.id.optResta);
-        if(opt.isChecked()){
-            respuesta= Num1 - Num2;
-        }
-
-        opt=findViewById(R.id.optMultiplicar);
-        if(opt.isChecked()){
-            respuesta= Num1 * Num2;
-        }
-
-        opt=findViewById(R.id.optDivision);
-        if(opt.isChecked()){
-            respuesta= Num1 / Num2;
-        }
-
-
-        opt=findViewById(R.id.optPorcentaje);
-        if(opt.isChecked()){
-            respuesta= Num1*Num2/100;
-        }
-
-        opt=findViewById(R.id.optExponente);
-        if(opt.isChecked()){
-            respuesta= Math.pow(Num1,Num2);//Math.pow(base,exponente)
-        }
-
-        opt=findViewById(R.id.optRaiz);
-        if(opt.isChecked()){
-            respuesta= Math.sqrt(Num1);
-        }
-        tempVal = findViewById(R.id.txtRespuesta);
-        tempVal.setText("Respuesta:" + Math.round(respuesta));//Math.round para redondear
+        tempVal = findViewById(R.id.lblAreaRespuesta);
+        tempVal.setText("Respuesta: " + respuesta);
     }
-};
 
+    double conversor(int de, int a, double cantidad) {
+        return (valores[de] / valores[a]) * cantidad;
+    }
+}
