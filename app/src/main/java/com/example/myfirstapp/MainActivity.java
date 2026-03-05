@@ -84,17 +84,14 @@ public class MainActivity extends AppCompatActivity {
         double total;
 
         if (metros <= 18) {
-            // Rango 1-18 m³: cuota fija
+
             total = 6.0;
 
         } else if (metros <= 28) {
-            // Rango 19-28 m³: $6 + exceso × $0.45
-            // Ej: 25m³ → (25-18)×0.45 + 6 = $9.15
             total = 6.0 + (metros - 18) * 0.45;
 
         } else {
-            // Rango 29+ m³: $6 + 10×$0.45 + exceso × $0.65
-            // Ej: 38m³ → 6 + 4.5 + (10×0.65) = $17.00
+
             total = 6.0 + (10 * 0.45) + (metros - 28) * 0.65;
         }
 
