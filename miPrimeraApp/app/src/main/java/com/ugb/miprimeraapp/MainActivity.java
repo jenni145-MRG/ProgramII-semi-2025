@@ -1,109 +1,69 @@
-package com.ugb.miprimeraapp;
 
+
+import static android.os.Build.VERSION_CODES_FULL.R;
+
+import miPrimeraApp.R;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import android.widget.TabHost;
-import android.widget.Spinner;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TabHost;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    TabHost tbh;
     TextView tempVal;
     Spinner spn;
     Button btn;
 
-    // Matriz corregida para que coincida con el orden de las etiquetas
-    Double valores[][] = {
-            {1.0, 0.92, 7.75, 24.63, 36.62, 513.15}, // Monedas (Base: Dólar)
-            {1.0, 2.20462, 1000.0, 35.274}, // Masa (Base: Kilogramo)
-            {1.0, 1000.0, 100.0, 39.3701, 3.28084, 1.1963, 1.09361}, // Longitud (Base: Metro)
-            {1.0, 0.264172, 1000.0, 0.001}, // Volumen (Base: Litro)
-            {1.0, 0.00097656, 0.00000095, 0.0000000009, 0.0000000000009}, // Almacenamiento (Base: KB)
-            {1.0, 1.0/60.0, 1.0/3600.0, 1.0/86400.0, 1.0/604800.0, 1.0/2629743.0, 1.0/31556926.0} // Tiempo (Base: Segundo)
-    };
-
-    String[][] etiquetas = {
-            {"Dolar", "Euro", "Quetzal", "Lempira", "Cordoba", "Colon CR"},
-            {"Kilogramo","Libra","Gramo","Onza"},
-            {"Mts", "Ml", "Cm", "Pulgada", "Pies", "Vara", "Yarda"},
-            {"Litro","Galon","Mililitro","Metros Cubicos"},
-            {"KB","MB","GB","TB","PB"},
-            {"Segundo","Minuto","Hora","Dia","Semana","Mes","Año"}
-    };
+    String[] Area = {"Pie Cuadrado", "Vara Cuadrada", "Yarda Cuadrada", "Metro Cuadrado", "Tareas", "Manzana", "Hectárea"};
+    Double valores[] = new Double[]{0.092903, 0.69874, 0.836127, 1.0, 437.5, 7000.0, 10000.0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn = findViewById(R.id.btnConvertir);
-        btn.setOnClickListener(v->convertir());
+        tbh = findViewById(R.id.tbhConversores);
+        tbh.setup();
 
-        spn = findViewById(R.id.spnTipo);
-        cambiarEtiqueta(0);
+        TabHost.TabSpec tsArea = tbh.newTabSpec("Area");
+        tsArea.setContent(R.id.tabArea);
+        tsArea.setIndicator("ÁREA");
+        tbh.addTab(tsArea);
 
-        spn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                cambiarEtiqueta(i);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
-        });
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, Area);
+
+        spn = findViewById(R.id.spnAreaDe);
+        spn.setAdapter(adapter);
+
+        Spinner spnA = findViewById(R.id.spnAreaA);
+        spnA.setAdapter(adapter);
+
+        btn = findViewById(R.id.btnAreaConvertir);
+        btn.setOnClickListener(v -> convertirArea());
     }
 
-    private void cambiarEtiqueta(int posicion){
-        ArrayAdapter<String> aaEtiquetas = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                etiquetas[posicion]
-        );
-        aaEtiquetas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    private void convertirArea() {
+        spn = findViewById(R.id.spnAreaDe);
+        int de = spn.getSelectedItemPosition();
 
-        Spinner spnDe = findViewById(R.id.spnDe);
-        spnDe.setAdapter(aaEtiquetas);
+        Spinner spnDestino = findViewById(R.id.spnAreaA);
+        int a = spnDestino.getSelectedItemPosition();
 
-        Spinner spnA = findViewById(R.id.spnA);
-        spnA.setAdapter(aaEtiquetas);
+        tempVal = findViewById(R.id.txtAreaCantidad);
+        double cantidad = Double.parseDouble(tempVal.getText().toString());
+
+        double respuesta = conversor(de, a, cantidad);
+
+        tempVal = findViewById(R.id.lblAreaRespuesta);
+        tempVal.setText("Respuesta: " + respuesta);
     }
 
-    private void convertir(){
-        try {
-            spn = findViewById(R.id.spnTipo);
-            int tipo = spn.getSelectedItemPosition();
-
-            Spinner spnDe = findViewById(R.id.spnDe);
-            int de = spnDe.getSelectedItemPosition();
-
-            Spinner spnA = findViewById(R.id.spnA);
-            int a = spnA.getSelectedItemPosition();
-
-            tempVal = findViewById(R.id.txtCantidad);
-            double cantidad = Double.parseDouble(tempVal.getText().toString());
-
-            double respuesta = conversor(tipo, de, a, cantidad);
-
-            TextView lblRespuesta = findViewById(R.id.lblRespuesta);
-            lblRespuesta.setText("Respuesta: " + String.format("%.2f", respuesta));
-            Toast.makeText(this,"Calculado correctamente",Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Toast.makeText(this, "Error: Ingrese un valor válido", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    double conversor(int tipo, int de, int a, double cantidad){
-        return (valores[tipo][a] / valores[tipo][de]) * cantidad;
+    double conversor(int de, int a, double cantidad) {
+        return (valores[de] / valores[a]) * cantidad;
     }
 }
