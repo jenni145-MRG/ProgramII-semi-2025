@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <TabHost
+        android:id="@+id/tbhTienda"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical">
+
+             <TabWidget
+                 android:id="@android:id/tabs"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"/>
+
+
+
+             <FrameLayout
+                 android:id="@android:id/tabcontent"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+
+                 <RelativeLayout
+                     android:id="@+id/pestañaInfo"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:orientation="vertical">
+                     <Button
+                         android:id="@+id/btnEliminar"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Eliminar"
+                         android:layout_alignParentBottom="true"
+                         android:layout_centerHorizontal="true"
+                         android:layout_marginBottom="32dp" />
+
+                     <Button
+                         android:id="@+id/btnAgregar"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Agregar"
+                         android:layout_toStartOf="@id/btnEliminar"
+                         android:layout_alignTop="@id/btnEliminar"
+                         android:layout_marginEnd="8dp" />
+
+                     <Button
+                         android:id="@+id/btnModificar"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Modificar"
+                         android:layout_toEndOf="@id/btnEliminar"
+                         android:layout_alignTop="@id/btnEliminar"
+                         android:layout_marginStart="8dp" />
+
+
+
+                     <TextView
+                         android:id="@+id/textView"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         app:layout_constraintBottom_toBottomOf="parent"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
+                         app:layout_constraintTop_toTopOf="parent" />
+
+                     <FrameLayout
+                         android:id="@+id/frameLayout"
+                         android:layout_width="409dp"
+                         android:layout_height="354dp"
+                         tools:ignore="MissingConstraints"
+                         tools:layout_editor_absoluteX="1dp"
+                         tools:layout_editor_absoluteY="123dp">
+
+                         <TableLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:stretchColumns="1">
+
+
+                             <TableRow>
+                                 <TextView
+                                 android:padding="10dp"
+                                 android:text="Codigo:" />
+
+                                 <EditText
+                                     android:id="@+id/txtCodigo"
+                                     android:hint="001"
+                                     android:padding="10dp" />
+
+                             </TableRow>
+                             <TableRow>
+
+                                 <TextView
+                                     android:padding="10dp"
+                                     android:text="Descripcion:" />
+
+                                 <EditText
+                                     android:id="@+id/txtDescripcion"
+                                     android:hint="ej:Descripcion del producto"
+                                     android:padding="10dp" />
+                             </TableRow>
+
+                             <TableRow>
+
+                                 <TextView
+                                     android:padding="10dp"
+                                     android:text="Marca:" />
+
+                                 <EditText
+                                     android:id="@+id/txtMarca"
+                                     android:hint="ej:CocaKola"
+                                     android:padding="10dp" />
+                             </TableRow>
+
+                             <TableRow>
+
+                                 <TextView
+                                     android:padding="10dp"
+                                     android:text="Presentacion:" />
+
+                                 <EditText
+                                     android:id="@+id/txtPresentacion"
+                                     android:hint="ej:Litros,Galones"
+                                     android:padding="10dp" />
+                             </TableRow>
+
+                             <TableRow>
+
+                                 <TextView
+                                     android:padding="10dp"
+                                     android:text="Precio:" />
+
+                                 <EditText
+                                     android:id="@+id/txtPrecio"
+                                     android:hint="ej:$1.50"
+                                     android:inputType="number"
+                                     android:padding="10dp" />
+
+
+
+                             </TableRow>
+
+
+                         </TableLayout>
+
+
+
+                     </FrameLayout>
+
+
+
+
+                 </RelativeLayout>
+
+             </FrameLayout>
+
+
+
+
+         </LinearLayout>
+    </TabHost>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
