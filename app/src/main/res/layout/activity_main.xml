@@ -90,7 +90,7 @@
                                  android:text="Codigo:" />
 
                                  <EditText
-                                     android:id="@+id/txtCodigo"
+                                     android:id="@+id/etCodigo"
                                      android:hint="001"
                                      android:padding="10dp" />
 
@@ -102,7 +102,7 @@
                                      android:text="Descripcion:" />
 
                                  <EditText
-                                     android:id="@+id/txtDescripcion"
+                                     android:id="@+id/etDescripcion"
                                      android:hint="ej:Descripcion del producto"
                                      android:padding="10dp" />
                              </TableRow>
@@ -114,7 +114,7 @@
                                      android:text="Marca:" />
 
                                  <EditText
-                                     android:id="@+id/txtMarca"
+                                     android:id="@+id/etMarca"
                                      android:hint="ej:CocaKola"
                                      android:padding="10dp" />
                              </TableRow>
@@ -126,7 +126,7 @@
                                      android:text="Presentacion:" />
 
                                  <EditText
-                                     android:id="@+id/txtPresentacion"
+                                     android:id="@+id/etPresentacion"
                                      android:hint="ej:Litros,Galones"
                                      android:padding="10dp" />
                              </TableRow>
@@ -138,7 +138,7 @@
                                      android:text="Precio:" />
 
                                  <EditText
-                                     android:id="@+id/txtPrecio"
+                                     android:id="@+id/etPrecio"
                                      android:hint="ej:$1.50"
                                      android:inputType="number"
                                      android:padding="10dp" />
@@ -165,6 +165,40 @@
 
 
          </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/Compras"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </ImageView>
+
+
+            <Button
+                android:id="@+id/btnRemover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Agregar"
+                android:layout_toStartOf="@id/btnRemover"
+                android:layout_alignTop="@id/btnRemover"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/btnPedido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Realizar Pedido"
+                android:layout_toEndOf="@id/btnPedido"
+                android:layout_alignTop="@id/btnPedido"
+                android:layout_marginStart="8dp" />
+
+        </RelativeLayout>
+
     </TabHost>
 
 
