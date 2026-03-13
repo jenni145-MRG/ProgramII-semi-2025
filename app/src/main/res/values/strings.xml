@@ -1,15 +1,3 @@
 <resources>
-    <string name="app_name">Calculadora Basica</string>
-    <string-array name="Area">
-        <item>Pie Cuadrado</item>
-        <item>Vara Cuadrada</item>
-        <item>Yarda Cuadrada</item>
-        <item>Metro Cuadrado</item>
-        <item>Tareas</item>
-        <item>Manzana</item>
-        <item>Hectárea</item>
-    </string-array>
-
-
-
+    <string name="app_name">MyFirstApp</string>
 </resources>
