@@ -1,207 +1,704 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/miTabHost"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <TabHost
-        android:id="@+id/tbhTienda"
+    android:layout_height="match_parent">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-             <TabWidget
-                 android:id="@android:id/tabs"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"/>
-
-
-
-             <FrameLayout
-                 android:id="@android:id/tabcontent"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent">
-
-                 <RelativeLayout
-                     android:id="@+id/pestañaInfo"
-                     android:layout_width="match_parent"
-                     android:layout_height="match_parent"
-                     android:orientation="vertical">
-                     <Button
-                         android:id="@+id/btnEliminar"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="Eliminar"
-                         android:layout_alignParentBottom="true"
-                         android:layout_centerHorizontal="true"
-                         android:layout_marginBottom="32dp" />
-
-                     <Button
-                         android:id="@+id/btnAgregar"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="Agregar"
-                         android:layout_toStartOf="@id/btnEliminar"
-                         android:layout_alignTop="@id/btnEliminar"
-                         android:layout_marginEnd="8dp" />
-
-                     <Button
-                         android:id="@+id/btnModificar"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="Modificar"
-                         android:layout_toEndOf="@id/btnEliminar"
-                         android:layout_alignTop="@id/btnEliminar"
-                         android:layout_marginStart="8dp" />
-
-
-
-                     <TextView
-                         android:id="@+id/textView"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         app:layout_constraintBottom_toBottomOf="parent"
-                         app:layout_constraintEnd_toEndOf="parent"
-                         app:layout_constraintStart_toStartOf="parent"
-                         app:layout_constraintTop_toTopOf="parent" />
-
-                     <FrameLayout
-                         android:id="@+id/frameLayout"
-                         android:layout_width="409dp"
-                         android:layout_height="354dp"
-                         tools:ignore="MissingConstraints"
-                         tools:layout_editor_absoluteX="1dp"
-                         tools:layout_editor_absoluteY="123dp">
-
-                         <TableLayout
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:stretchColumns="1">
-
-
-                             <TableRow>
-                                 <TextView
-                                 android:padding="10dp"
-                                 android:text="Codigo:" />
-
-                                 <EditText
-                                     android:id="@+id/etCodigo"
-                                     android:hint="001"
-                                     android:padding="10dp" />
-
-                             </TableRow>
-                             <TableRow>
-
-                                 <TextView
-                                     android:padding="10dp"
-                                     android:text="Descripcion:" />
-
-                                 <EditText
-                                     android:id="@+id/etDescripcion"
-                                     android:hint="ej:Descripcion del producto"
-                                     android:padding="10dp" />
-                             </TableRow>
-
-                             <TableRow>
-
-                                 <TextView
-                                     android:padding="10dp"
-                                     android:text="Marca:" />
-
-                                 <EditText
-                                     android:id="@+id/etMarca"
-                                     android:hint="ej:CocaKola"
-                                     android:padding="10dp" />
-                             </TableRow>
-
-                             <TableRow>
-
-                                 <TextView
-                                     android:padding="10dp"
-                                     android:text="Presentacion:" />
-
-                                 <EditText
-                                     android:id="@+id/etPresentacion"
-                                     android:hint="ej:Litros,Galones"
-                                     android:padding="10dp" />
-                             </TableRow>
-
-                             <TableRow>
-
-                                 <TextView
-                                     android:padding="10dp"
-                                     android:text="Precio:" />
-
-                                 <EditText
-                                     android:id="@+id/etPrecio"
-                                     android:hint="ej:$1.50"
-                                     android:inputType="number"
-                                     android:padding="10dp" />
-
-
-
-                             </TableRow>
-
-
-                         </TableLayout>
-
-
-
-                     </FrameLayout>
-
-
-
-
-                 </RelativeLayout>
-
-             </FrameLayout>
-
-
-
-
-         </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/Compras"
+        <TabWidget
+            android:id="@android:id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:background="#663FA8" />
 
-            <ImageView
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:id="@+id/pestaña_registro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </ImageView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <EditText
+                        android:id="@+id/txtCodigo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Código"
+                        android:layout_marginBottom="10dp"/>
+
+                    <EditText
+                        android:id="@+id/txtDescripcion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Descripción"
+                        android:layout_marginBottom="10dp"/>
+
+                    <EditText
+                        android:id="@+id/txtMarca"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Marca"
+                        android:layout_marginBottom="10dp"/>
+
+                    <EditText
+                        android:id="@+id/txtPresentacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Presentación"
+                        android:layout_marginBottom="10dp"/>
+
+                    <EditText
+                        android:id="@+id/txtPrecio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Precio"
+                        android:inputType="numberDecimal"
+                        android:layout_marginBottom="15dp"/>
+
+                    <ImageButton
+                        android:id="@+id/imgFotoProducto"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:layout_marginBottom="20dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <Button
+                            android:id="@+id/btnAgregar"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_margin="4dp"
+                            android:text="Agregar" />
+
+                        <Button
+                            android:id="@+id/btnModificar"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_margin="4dp"
+                            android:text="Editar" />
+
+                        <Button
+                            android:id="@+id/btnEliminar"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_margin="4dp"
+                            android:text="Eliminar" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+
+            <ScrollView
+                android:id="@+id/pestaña_producto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
-            <Button
-                android:id="@+id/btnRemover"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Agregar"
-                android:layout_toStartOf="@id/btnRemover"
-                android:layout_alignTop="@id/btnRemover"
-                android:layout_marginEnd="8dp" />
+                <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/btnPedido"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Realizar Pedido"
-                android:layout_toEndOf="@id/btnPedido"
-                android:layout_alignTop="@id/btnPedido"
-                android:layout_marginStart="8dp" />
-
-        </RelativeLayout>
-
-    </TabHost>
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="2"
+                        android:padding="8dp"
+                        android:alignmentMode="alignMargins"
+                        android:background="#8AADE6">
 
 
 
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+
+                                <ImageView
+                                    android:id="@+id/imageView1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/img" />
+
+                                <Button
+                                    android:id="@+id/button1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp">
+
+                                </Button>
+
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/img_1" />
+
+                                <Button
+                                    android:id="@+id/button2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/img_2" />
+
+                                <Button
+                                    android:id="@+id/button3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/img_3" />
+
+                                <Button
+                                    android:id="@+id/button4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/img_4" />
+
+                                <Button
+                                    android:id="@+id/button5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView6"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/img_5" />
+
+                                <Button
+                                    android:id="@+id/button6"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView7"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/img_sk6" />
+
+                                <Button
+                                    android:id="@+id/button7"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView8"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/img_sk7" />
+
+                                <Button
+                                    android:id="@+id/button8"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView9"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/img_sk8" />
+
+                                <Button
+                                    android:id="@+id/button9"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView10"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/img_ts" />
+
+                                <Button
+                                    android:id="@+id/button10"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView11"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/img_ts2" />
+
+                                <Button
+                                    android:id="@+id/button11"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView12"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/img_ts3" />
+
+                                <Button
+                                    android:id="@+id/button12"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView13"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/imgbilli" />
+
+                                <Button
+                                    android:id="@+id/button13"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView14"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/imgbilli2" />
+
+                                <Button
+                                    android:id="@+id/button14"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView15"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/imgbilli3" />
+
+                                <Button
+                                    android:id="@+id/button15"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView16"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/img_btr" />
+
+                                <Button
+                                    android:id="@+id/button16"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Agregar"
+                                    android:textSize="12sp"
+                                    >
+
+                                </Button>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </GridLayout>
+                </ScrollView>
+            </ScrollView>
+
+
+            <ScrollView
+                android:id="@+id/pestaña_compra"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
+    </LinearLayout>
+
+</TabHost>
