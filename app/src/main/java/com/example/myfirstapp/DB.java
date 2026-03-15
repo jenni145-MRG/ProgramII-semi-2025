@@ -7,17 +7,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DB extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "primer.db";
+    private static final String DATABASE_NAME = "Tienda";
     private static final int DATABASE_VERSION = 1;
 
     private static final String SQLdb =
-            "CREATE TABLE amigos (" +
-                    "idAmigo INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "nombre TEXT," +
-                    "direccion TEXT," +
-                    "telefono TEXT," +
-                    "email TEXT," +
-                    "dui TEXT," +
+            "CREATE TABLE productos  (" +
+                    "idProducto  INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "codigo TEXT," +
+                    "descripcion TEXT," +
+                    "marca TEXT," +
+                    "presentacion TEXT," +
+                    "precio TEXT," +
                     "urlFoto TEXT)";
 
     public DB(Context context) {
@@ -31,11 +31,11 @@ public class DB extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS amigos");
+        db.execSQL("DROP TABLE IF EXISTS productos");
         onCreate(db);
     }
 
-    public String administrar_amigos(String accion, String[] datos) {
+    public String administrar_Productos(String accion, String[] datos) {
         try {
             SQLiteDatabase db = getWritableDatabase();
             String mensaje = "ok";
@@ -44,7 +44,7 @@ public class DB extends SQLiteOpenHelper {
             switch (accion) {
 
                 case "nuevo":
-                    sql = "INSERT INTO amigos(nombre,direccion,telefono,email,dui,urlFoto) VALUES(" +
+                    sql = "INSERT INTO productos(codigo,descripcion,marca,presentacion,precio,urlFoto) VALUES(" +
                             "'" + datos[1] + "'," +
                             "'" + datos[2] + "'," +
                             "'" + datos[3] + "'," +
@@ -54,18 +54,18 @@ public class DB extends SQLiteOpenHelper {
                     break;
 
                 case "modificar":
-                    sql = "UPDATE amigos SET " +
-                            "nombre='" + datos[1] + "'," +
-                            "direccion='" + datos[2] + "'," +
-                            "telefono='" + datos[3] + "'," +
-                            "email='" + datos[4] + "'," +
-                            "dui='" + datos[5] + "'," +
+                    sql = "UPDATE productos  SET " +
+                            "codigo='" + datos[1] + "'," +
+                            "descripcion='" + datos[2] + "'," +
+                            "marca='" + datos[3] + "'," +
+                            "presentacion='" + datos[4] + "'," +
+                            "precio='" + datos[5] + "'," +
                             "urlFoto='" + datos[6] + "' " +
-                            "WHERE idAmigo='" + datos[0] + "'";
+                            "WHERE idProducto='" + datos[0] + "'";
                     break;
 
                 case "eliminar":
-                    sql = "DELETE FROM amigos WHERE idAmigo='" + datos[0] + "'";
+                    sql = "DELETE FROM productos  WHERE idProducto='" + datos[0] + "'";
                     break;
             }
 
@@ -79,8 +79,16 @@ public class DB extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor lista_amigos() {
+    public Cursor lista_productos() {
         SQLiteDatabase db = getReadableDatabase();
-        return db.rawQuery("SELECT * FROM amigos", null);
+        return db.rawQuery("SELECT * FROM productos", null);
     }
-}
+    //Busacr
+    public  Cursor buscar_producto(String codigo){
+        SQLiteDatabase db = getReadableDatabase();
+        return db.rawQuery(
+                "SELECT * FROM productos WHERE codigo LIKE '%" + codigo + "%'", null);
+    }
+
+    }
+
