@@ -44,7 +44,11 @@ public class MainActivity extends AppCompatActivity {
         spec3.setIndicator("COMPRAS");
         spec3.setContent(R.id.pestaña_compra);
         host.addTab(spec3);
-        }
+
+
+
+
+    }
     }
 
 
