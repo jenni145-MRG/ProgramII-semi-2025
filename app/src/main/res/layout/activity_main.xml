@@ -27,6 +27,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:textColor="#000000"
+        android:textColorHint="#888888"
         android:hint="Código del producto"
         android:inputType="text"
         android:background="@android:drawable/edit_text" />
@@ -39,6 +41,8 @@
         android:layout_marginTop="14dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:textColor="#000000"
+        android:textColorHint="#888888"
         android:hint="Descripción"
         android:inputType="text"
         android:background="@android:drawable/edit_text" />
@@ -47,6 +51,8 @@
         android:id="@+id/txtMarca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textColorHint="#888888"
         android:layout_below="@+id/txtDescripcion"
         android:layout_marginTop="14dp"
         android:layout_marginLeft="20dp"
@@ -63,7 +69,9 @@
         android:layout_marginTop="14dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Presentación (ej: 500ml, 1kg)"
+        android:textColor="#000000"
+        android:textColorHint="#888888"
+        android:hint="Presentación"
         android:inputType="text"
         android:background="@android:drawable/edit_text" />
 
@@ -75,28 +83,86 @@
         android:layout_marginTop="14dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:textColor="#000000"
+        android:textColorHint="#888888"
         android:hint="Precio ($)"
         android:inputType="numberDecimal"
         android:background="@android:drawable/edit_text" />
 
-    <ImageButton
-        android:id="@+id/imgFotoProducto"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <LinearLayout
+        android:id="@+id/layoutFotos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/txtPrecio"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:src="@drawable/camera_6286759"
-        android:background="@drawable/circulo_foto"
-        android:scaleType="centerCrop"
-        android:clipToOutline="true" />
+        android:gravity="center"
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/btnFotoAnterior"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="◀"
+            android:textSize="16sp"
+            android:padding="0dp"
+            android:backgroundTint="#1565C0"
+            android:textColor="#FFFFFF" />
+
+        <ImageButton
+            android:id="@+id/imgFotoProducto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/camera_6286759"
+            android:background="@drawable/circulo_foto"
+            android:scaleType="centerCrop" />
+
+        <Button
+            android:id="@+id/btnFotoSiguiente"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="▶"
+            android:textSize="16sp"
+            android:padding="0dp"
+            android:backgroundTint="#1565C0"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutBotonesFoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutFotos"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvContadorFotos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 fotos"
+            android:textColor="#888888"
+            android:textSize="12sp"
+            android:layout_marginRight="16dp" />
+
+        <TextView
+            android:id="@+id/tvAgregarFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+ Agregar foto"
+            android:textColor="#1565C0"
+            android:textSize="12sp" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnGuardarProducto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imgFotoProducto"
+        android:layout_below="@+id/layoutBotonesFoto"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
