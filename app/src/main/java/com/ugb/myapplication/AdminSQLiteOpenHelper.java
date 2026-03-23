@@ -13,7 +13,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE Informacion (Codigo INTEGER PRIMARY KEY, Descripcion TEXT, Marca TEXT, Precio REAL)");
+        db.execSQL("CREATE TABLE Informacion (Codigo INTEGER PRIMARY KEY, Descripcion TEXT, Marca TEXT, Presentacion TEXT,precio REAL,foto TEXT)");
     }
 
     @Override
