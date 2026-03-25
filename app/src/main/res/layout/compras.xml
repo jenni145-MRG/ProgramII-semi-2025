@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:id="@+id/pestaña_compra"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D1E9F6">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp"
+                android:weightSum="10">
+
+                <ImageButton
+                    android:id="@+id/btnCardAñadirFoto1"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="2"
+                    android:layout_marginEnd="12dp"
+                    android:src="@android:drawable/ic_menu_camera"
+                    android:contentDescription="Añadir foto"
+                    android:scaleType="centerInside"
+                    />
+
+                <Button
+                    android:id="@+id/btnCardEliminar1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:text="Eliminar"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp"
+                android:weightSum="10">
+
+                <ImageButton
+                    android:id="@+id/btnCardAñadirFoto2"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="2"
+                    android:layout_marginEnd="12dp"
+                    android:src="@android:drawable/ic_menu_camera"
+                    android:contentDescription="Añadir foto"
+                    android:scaleType="centerInside"
+                    />
+
+                <Button
+                    android:id="@+id/btnCardEliminar2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:text="Eliminar"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:minHeight="100dp"/>
+
+            <Button
+                android:id="@+id/btnRealizarPedido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:text="Realizar pedido"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:padding="12dp"
+                app:cornerRadius="8dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
