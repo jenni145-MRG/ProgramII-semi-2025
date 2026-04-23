@@ -57,7 +57,7 @@ public class ProductoAdapter extends BaseAdapter {
         tvPrecio.setText("$" + item.get("precio"));
 
         String urlFoto = item.get("urlFoto");
-        imgItem.setImageResource(R.drawable.camera_6286759); // imagen por defecto
+        imgItem.setImageResource(android.R.drawable.ic_menu_camera); // imagen por defecto
 
         if (urlFoto != null && !urlFoto.isEmpty()) {
             String primeraFoto = urlFoto.split(",")[0].trim();

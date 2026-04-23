@@ -10,7 +10,7 @@
         android:layout_height="60dp"
         android:background="@drawable/circulo_foto"
         android:scaleType="centerCrop"
-        android:src="@drawable/camera_6286759" />
+        android:src="@android:drawable/ic_menu_camera" />
 
     <TextView
         android:id="@+id/tvCodigo"

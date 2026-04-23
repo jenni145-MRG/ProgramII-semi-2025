@@ -45,7 +45,6 @@ public class ListaActivity extends AppCompatActivity {
             }
         });
 
-
         lista.setOnItemClickListener((parent, view, position, id) -> {
             HashMap<String, String> item =
                     (HashMap<String, String>) parent.getItemAtPosition(position);
@@ -80,6 +79,26 @@ public class ListaActivity extends AppCompatActivity {
                                             String resultado =
                                                     db.administrar_Productos("eliminar", datos);
                                             if (resultado.equals("ok")) {
+                                                // Eliminar también en CouchDB
+                                                String docUrl = utilidades.url_mto
+                                                        + "/producto_" + item.get("idProducto");
+                                                obtenerDatosServidor.obtener(docUrl, respuesta -> {
+                                                    if (respuesta != null && respuesta.contains("_rev")) {
+                                                        try {
+                                                            int i = respuesta.indexOf("\"_rev\":\"") + 8;
+                                                            int j = respuesta.indexOf("\"", i);
+                                                            String rev = respuesta.substring(i, j);
+                                                            String deleteUrl = docUrl + "?rev=" + rev;
+                                                            enviarDatosServidor.enviar("", "DELETE",
+                                                                    deleteUrl, r ->
+                                                                            Toast.makeText(this,
+                                                                                    r != null && r.contains("\"ok\":true")
+                                                                                            ? "Eliminado de CouchDB ✓"
+                                                                                            : "Eliminado localmente",
+                                                                                    Toast.LENGTH_SHORT).show());
+                                                        } catch (Exception e) { }
+                                                    }
+                                                });
                                                 Toast.makeText(this, "Producto eliminado ✓",
                                                         Toast.LENGTH_SHORT).show();
                                                 cargarLista();
@@ -99,7 +118,6 @@ public class ListaActivity extends AppCompatActivity {
         });
     }
 
-
     private void filtrar(String texto) {
         ArrayList<HashMap<String, String>> filtrados = new ArrayList<>();
 
@@ -118,7 +136,6 @@ public class ListaActivity extends AppCompatActivity {
         lista.setAdapter(adapter);
     }
 
-
     private void cargarLista() {
         todosLosDatos = new ArrayList<>();
         Cursor c = db.lista_productos();
@@ -135,10 +152,10 @@ public class ListaActivity extends AppCompatActivity {
             todosLosDatos.add(fila);
         }
         c.close();
+
         FloatingActionButton fabAgregar = findViewById(R.id.fabAgregar);
-        fabAgregar.setOnClickListener(v -> {
-            startActivity(new Intent(this, MainActivity.class));
-        });
+        fabAgregar.setOnClickListener(v ->
+                startActivity(new Intent(this, MainActivity.class)));
 
         adapter = new ProductoAdapter(this, todosLosDatos);
         lista.setAdapter(adapter);
