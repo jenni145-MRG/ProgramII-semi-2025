@@ -2,6 +2,7 @@ package com.example.myfirstapp;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,9 +32,11 @@ public class enviarDatosServidor {
                 httpURLConnection.setRequestProperty("Authorization",
                         "Basic " + utilidades.credencialesCodificadas);
 
+
                 Writer writer = new OutputStreamWriter(httpURLConnection.getOutputStream(), "UTF-8");
                 writer.write(jsonDatos);
                 writer.close();
+
 
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -48,8 +51,12 @@ public class enviarDatosServidor {
                 if (httpURLConnection != null) httpURLConnection.disconnect();
             }
 
-            String finalResponse = jsonResponse;
+
+            final String finalResponse = jsonResponse;
             new Handler(Looper.getMainLooper()).post(() -> {
+
+                Log.d("COUCHDB_RESPUESTA", "Respuesta del servidor: " + finalResponse);
+
                 if (callback != null) callback.onRespuesta(finalResponse);
             });
         }).start();

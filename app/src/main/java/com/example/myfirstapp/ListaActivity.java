@@ -65,6 +65,8 @@ public class ListaActivity extends AppCompatActivity {
                                 intent.putExtra("presentacion", item.get("presentacion"));
                                 intent.putExtra("precio",       item.get("precio"));
                                 intent.putExtra("urlFoto",      item.get("urlFoto"));
+                                intent.putExtra("Costo",      item.get("costo"));
+                                intent.putExtra("Stock",      item.get("stock"));
                                 startActivity(intent);
                                 break;
 
@@ -149,6 +151,8 @@ public class ListaActivity extends AppCompatActivity {
             fila.put("presentacion", c.getString(4));
             fila.put("precio",       c.getString(5));
             fila.put("urlFoto",      c.getString(6));
+            fila.put("Costo",      c.getString(7));
+            fila.put("Stock",      c.getString(8));
             todosLosDatos.add(fila);
         }
         c.close();

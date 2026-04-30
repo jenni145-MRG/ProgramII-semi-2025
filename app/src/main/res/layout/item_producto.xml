@@ -42,5 +42,37 @@
         android:textColor="#2E7D32"
         android:textStyle="bold"
         android:textSize="13sp" />
+    <TextView
+        android:id="@+id/tvCosto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imgItem"
+        android:layout_below="@+id/tvDescripcion"
+        android:layout_marginStart="12dp"
+        android:textColor="#2E7D32"
+        android:textStyle="bold"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tvGanancia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imgItem"
+        android:layout_below="@+id/tvDescripcion"
+        android:layout_marginStart="12dp"
+        android:textColor="#2E7D32"
+        android:textStyle="bold"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tvStock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imgItem"
+        android:layout_below="@+id/tvDescripcion"
+        android:layout_marginStart="12dp"
+        android:textColor="#2E7D32"
+        android:textStyle="bold"
+        android:textSize="13sp" />
 
 </RelativeLayout>

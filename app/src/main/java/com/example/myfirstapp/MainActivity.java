@@ -6,8 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -29,12 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
     DB db;
     Button btn;
-    TextView tempVal;
     String accion = "nuevo", idProducto = "", urlFoto = "";
     ArrayList<String> listaFotos = new ArrayList<>();
     int fotoActual = 0;
-    Intent tomarFotoIntent;
-    FloatingActionButton fab;
     ImageButton img;
     TextView tvContadorFotos;
 
@@ -43,17 +38,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db              = new DB(this);
-        img             = findViewById(R.id.imgFotoProducto);
-        tvContadorFotos = findViewById(R.id.tvContadorFotos);
-        btn             = findViewById(R.id.btnGuardarProducto);
-        fab             = findViewById(R.id.fabListaProductos);
+        db = new DB(this);
+        img = findViewById(R.id.imgFotoProducto);
+        btn = findViewById(R.id.btnGuardarProducto);
+        tvContadorFotos = findViewById(R.id.tvAgregarFoto); // Asegúrate que el ID coincida
 
-        img.setClipToOutline(true);
         img.setOnClickListener(v -> tomarFoto());
+        btn.setOnClickListener(v -> guardarProducto());
 
-        TextView tvAgregarFoto = findViewById(R.id.tvAgregarFoto);
-        tvAgregarFoto.setOnClickListener(v -> tomarFoto());
+        findViewById(R.id.fabListaProductos).setOnClickListener(v ->
+                startActivity(new Intent(this, ListaActivity.class)));
 
         findViewById(R.id.btnFotoAnterior).setOnClickListener(v -> {
             if (listaFotos.size() > 0) {
@@ -69,11 +63,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btn.setOnClickListener(v -> guardarProducto());
-
-        fab.setOnClickListener(v ->
-                startActivity(new Intent(this, ListaActivity.class)));
-
         cargarDatosEdicion();
     }
 
@@ -83,159 +72,79 @@ public class MainActivity extends AppCompatActivity {
             if (foto.exists()) {
                 img.setImageURI(null);
                 img.setImageURI(Uri.fromFile(foto));
-                img.setClipToOutline(true);
             }
-            tvContadorFotos.setText((indice + 1) + "/" + listaFotos.size() + " fotos");
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menuopciones, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.mnxAgregar) {
-            limpiarCampos();
-            return true;
-        } else if (id == R.id.mnxModificar) {
-            guardarProducto();
-            return true;
-        } else if (id == R.id.mnxEliminar) {
-            if (!idProducto.isEmpty()) {
-                new android.app.AlertDialog.Builder(this)
-                        .setTitle("Eliminar Producto")
-                        .setMessage("¿Estás seguro que deseas eliminar este producto?")
-                        .setPositiveButton("Sí, eliminar", (dialog, which) -> {
-                            String[] datos = {idProducto, "", "", "", "", "", ""};
-                            String resultado = db.administrar_Productos("eliminar", datos);
-                            if (resultado.equals("ok")) {
-                                eliminarEnCouchDB(idProducto);
-                                mostrarMsg("Producto eliminado ✓");
-                                limpiarCampos();
-                            }
-                        })
-                        .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
-                        .show();
-            } else {
-                mostrarMsg("Selecciona un producto para eliminar");
-            }
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void tomarFoto() {
-        tomarFotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent tomarFotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         try {
             File fotoProducto = crearImgProducto();
             if (fotoProducto != null) {
-                Uri uriFoto = FileProvider.getUriForFile(
-                        MainActivity.this,
-                        getPackageName() + ".fileprovider",
-                        fotoProducto);
+                Uri uriFoto = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", fotoProducto);
                 tomarFotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriFoto);
                 startActivityForResult(tomarFotoIntent, 1);
-            } else {
-                mostrarMsg("No se pudo crear la foto");
-            }
-        } catch (Exception e) {
-            mostrarMsg("Error al tomar la foto: " + e.getMessage());
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        try {
-            if (requestCode == 1 && resultCode == RESULT_OK) {
-                listaFotos.add(urlFoto);
-                fotoActual = listaFotos.size() - 1;
-                mostrarFoto(fotoActual);
-            } else {
-                mostrarMsg("No fue posible mostrar la foto");
             }
         } catch (Exception e) {
             mostrarMsg("Error: " + e.getMessage());
         }
     }
 
-    private File crearImgProducto() throws Exception {
-        String fechaHoraMs = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()),
-                fileName = "foto_" + fechaHoraMs;
-        File dirAlmacenamiento = getExternalFilesDir(Environment.DIRECTORY_DCIM);
-        if (!dirAlmacenamiento.exists()) {
-            dirAlmacenamiento.mkdir();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            listaFotos.add(urlFoto);
+            fotoActual = listaFotos.size() - 1;
+            mostrarFoto(fotoActual);
         }
-        File image = File.createTempFile(fileName, ".jpg", dirAlmacenamiento);
+    }
+
+    private File crearImgProducto() throws Exception {
+        String fileName = "foto_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File dir = getExternalFilesDir(Environment.DIRECTORY_DCIM);
+        File image = File.createTempFile(fileName, ".jpg", dir);
         urlFoto = image.getAbsolutePath();
         return image;
     }
 
     private void guardarProducto() {
-        tempVal = findViewById(R.id.txtCodigo);
-        String codigo = tempVal.getText().toString();
+        String codigo = ((EditText) findViewById(R.id.txtCodigo)).getText().toString();
+        String descripcion = ((EditText) findViewById(R.id.txtDescripcion)).getText().toString();
+        String precio = ((EditText) findViewById(R.id.txtPrecio)).getText().toString();
+        String costo = ((EditText) findViewById(R.id.txtCosto)).getText().toString();
+        String stock = ((EditText) findViewById(R.id.txtStock)).getText().toString();
 
-        tempVal = findViewById(R.id.txtDescripcion);
-        String descripcion = tempVal.getText().toString();
-
-        tempVal = findViewById(R.id.txtMarca);
-        String marca = tempVal.getText().toString();
-
-        tempVal = findViewById(R.id.txtPresentacion);
-        String presentacion = tempVal.getText().toString();
-
-        tempVal = findViewById(R.id.txtPrecio);
-        String precio = tempVal.getText().toString();
-
-        if (codigo.isEmpty() || descripcion.isEmpty() || precio.isEmpty()) {
-            mostrarMsg("Código, descripción y precio son obligatorios");
+        if (codigo.isEmpty() || precio.isEmpty() || costo.isEmpty()) {
+            mostrarMsg("Campos obligatorios vacíos");
             return;
         }
 
         String todasLasFotos = String.join(",", listaFotos);
-        String[] datos = {idProducto, codigo, descripcion, marca,
-                presentacion, precio, todasLasFotos};
+        String ganancia = String.valueOf(Double.parseDouble(precio) - Double.parseDouble(costo));
+
+        String[] datos = {idProducto, codigo, descripcion, "", "", precio, todasLasFotos, costo, ganancia, stock};
         String resultado = db.administrar_Productos(accion, datos);
 
         if (resultado.equals("ok")) {
-            mostrarMsg("Producto guardado con éxito ✓");
-
-            detectarinternet detector = new detectarinternet(this);
-            if (detector.hayConexionInternet()) {
+            if (new detectarinternet(this).hayConexionInternet()) {
+                // SI ES NUEVO, BUSCAMOS EL ID QUE SQLITE ACABA DE GENERAR
+                String idParaSincronizar = idProducto;
                 if (accion.equals("nuevo")) {
-                    // Obtener el último ID insertado en SQLite
-                    Cursor c = db.lista_productos();
-                    String idReal = "";
-                    if (c.moveToLast()) idReal = c.getString(0);
-                    c.close();
-                    sincronizarConCouchDB(idReal, codigo, descripcion,
-                            marca, presentacion, precio, todasLasFotos);
-                } else {
-                    // Modificar — usar el idProducto existente
-                    sincronizarConCouchDB(idProducto, codigo, descripcion,
-                            marca, presentacion, precio, todasLasFotos);
+                    Cursor cur = db.lista_productos();
+                    if (cur.moveToLast()) idParaSincronizar = cur.getString(0);
+                    cur.close();
                 }
-            } else {
-                mostrarMsg("Sin internet, solo guardado localmente");
+                sincronizarConCouchDB(idParaSincronizar, codigo, descripcion, precio, costo, ganancia, stock, todasLasFotos);
             }
-
-            limpiarCampos();
-        } else {
-            mostrarMsg("Error: " + resultado);
+            mostrarMsg("Guardado ✓");
+            finish();
         }
     }
 
-    private void sincronizarConCouchDB(String id, String codigo, String descripcion,
-                                       String marca, String presentacion,
-                                       String precio, String urlFoto) {
-        String docUrl = utilidades.url_mto + "/producto_" + id;
+    private void sincronizarConCouchDB(String id, String cod, String des, String pve, String cos, String gan, String sto, String foto) {
+        String docUrl = utilidades.url_mto + "/" + id; // USAMOS EL ID QUE PASAMOS POR PARÁMETRO
 
-        // Primero verificar si ya existe para obtener _rev
         obtenerDatosServidor.obtener(docUrl, respuesta -> {
             String rev = "";
             if (respuesta != null && respuesta.contains("_rev")) {
@@ -243,95 +152,48 @@ public class MainActivity extends AppCompatActivity {
                     int i = respuesta.indexOf("\"_rev\":\"") + 8;
                     int j = respuesta.indexOf("\"", i);
                     rev = respuesta.substring(i, j);
-                } catch (Exception e) { }
+                } catch (Exception e) {}
             }
 
-            String revFinal = rev;
-            String json = "{" +
-                    (revFinal.isEmpty() ? "" : "\"_rev\":\"" + revFinal + "\",") +
-                    "\"codigo\":\"" + codigo + "\"," +
-                    "\"descripcion\":\"" + descripcion + "\"," +
-                    "\"marca\":\"" + marca + "\"," +
-                    "\"presentacion\":\"" + presentacion + "\"," +
-                    "\"precio\":\"" + precio + "\"," +
-                    "\"urlFoto\":\"" + urlFoto + "\"" +
+            String json = "{";
+            if (!rev.isEmpty()) json += "\"_rev\":\"" + rev + "\",";
+            json += "\"idProducto\":\"" + id + "\"," +
+                    "\"codigo\":\"" + cod + "\"," +
+                    "\"descripcion\":\"" + des + "\"," +
+                    "\"precio\":" + pve + "," +
+                    "\"costo\":" + cos + "," +
+                    "\"ganancia\":" + gan + "," +
+                    "\"stock\":" + sto + "," +
+                    "\"urlFoto\":\"" + foto + "\"" +
                     "}";
 
             enviarDatosServidor.enviar(json, "PUT", docUrl, r -> {
-                if (r != null && (r.contains("\"ok\":true") || r.contains("\"id\""))) {
-                    mostrarMsg("Sincronizado con CouchDB ✓");
-                } else {
-                    mostrarMsg("Error CouchDB: " + r);
-                }
+                android.util.Log.d("COUCHDB", r);
             });
-        });
-    }
-
-    private void eliminarEnCouchDB(String id) {
-        String docUrl = utilidades.url_mto + "/producto_" + id;
-        obtenerDatosServidor.obtener(docUrl, respuesta -> {
-            if (respuesta != null && respuesta.contains("_rev")) {
-                try {
-                    int i = respuesta.indexOf("\"_rev\":\"") + 8;
-                    int j = respuesta.indexOf("\"", i);
-                    String rev = respuesta.substring(i, j);
-                    String deleteUrl = docUrl + "?rev=" + rev;
-                    enviarDatosServidor.enviar("", "DELETE", deleteUrl, r ->
-                            mostrarMsg(r != null && r.contains("\"ok\":true")
-                                    ? "Eliminado de CouchDB ✓"
-                                    : "Error al eliminar de CouchDB"));
-                } catch (Exception e) {
-                    mostrarMsg("Error al eliminar de CouchDB");
-                }
-            }
         });
     }
 
     private void cargarDatosEdicion() {
         Intent intent = getIntent();
         if (intent.hasExtra("idProducto")) {
-            accion     = "modificar";
+            accion = "modificar";
             idProducto = intent.getStringExtra("idProducto");
-            urlFoto    = intent.getStringExtra("urlFoto");
+            ((EditText) findViewById(R.id.txtCodigo)).setText(intent.getStringExtra("codigo"));
+            ((EditText) findViewById(R.id.txtDescripcion)).setText(intent.getStringExtra("descripcion"));
+            ((EditText) findViewById(R.id.txtPrecio)).setText(intent.getStringExtra("precio"));
+            ((EditText) findViewById(R.id.txtCosto)).setText(intent.getStringExtra("costo"));
+            ((EditText) findViewById(R.id.txtStock)).setText(intent.getStringExtra("stock"));
 
-            ((EditText) findViewById(R.id.txtCodigo))
-                    .setText(intent.getStringExtra("codigo"));
-            ((EditText) findViewById(R.id.txtDescripcion))
-                    .setText(intent.getStringExtra("descripcion"));
-            ((EditText) findViewById(R.id.txtMarca))
-                    .setText(intent.getStringExtra("marca"));
-            ((EditText) findViewById(R.id.txtPresentacion))
-                    .setText(intent.getStringExtra("presentacion"));
-            ((EditText) findViewById(R.id.txtPrecio))
-                    .setText(intent.getStringExtra("precio"));
-
-            if (urlFoto != null && !urlFoto.isEmpty()) {
-                String[] fotos = urlFoto.split(",");
-                for (String f : fotos) listaFotos.add(f.trim());
-                fotoActual = 0;
-                mostrarFoto(fotoActual);
+            String fotos = intent.getStringExtra("urlFoto");
+            if (fotos != null && !fotos.isEmpty()) {
+                for (String f : fotos.split(",")) listaFotos.add(f.trim());
+                mostrarFoto(0);
             }
             btn.setText("Actualizar Producto");
         }
     }
 
-    private void limpiarCampos() {
-        ((EditText) findViewById(R.id.txtCodigo)).setText("");
-        ((EditText) findViewById(R.id.txtDescripcion)).setText("");
-        ((EditText) findViewById(R.id.txtMarca)).setText("");
-        ((EditText) findViewById(R.id.txtPresentacion)).setText("");
-        ((EditText) findViewById(R.id.txtPrecio)).setText("");
-        img.setImageResource(android.R.drawable.ic_menu_camera);
-        listaFotos.clear();
-        fotoActual  = 0;
-        urlFoto     = "";
-        accion      = "nuevo";
-        idProducto  = "";
-        tvContadorFotos.setText("0 fotos");
-        btn.setText("Guardar Producto");
-    }
-
     private void mostrarMsg(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

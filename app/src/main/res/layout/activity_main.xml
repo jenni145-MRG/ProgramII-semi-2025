@@ -1,183 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <TextView
-        android:id="@+id/tvTitulo"
+    android:fillViewport="true">
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tienda "
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#1565C0"
-        android:gravity="center"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" />
-
-    <EditText
-        android:id="@+id/txtCodigo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTitulo"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textColor="#000000"
-        android:textColorHint="#888888"
-        android:hint="Código del producto"
-        android:inputType="text"
-        android:background="@android:drawable/edit_text" />
-
-    <EditText
-        android:id="@+id/txtDescripcion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtCodigo"
-        android:layout_marginTop="14dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textColor="#000000"
-        android:textColorHint="#888888"
-        android:hint="Descripción"
-        android:inputType="text"
-        android:background="@android:drawable/edit_text" />
-
-    <EditText
-        android:id="@+id/txtMarca"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:textColorHint="#888888"
-        android:layout_below="@+id/txtDescripcion"
-        android:layout_marginTop="14dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="Marca"
-        android:inputType="text"
-        android:background="@android:drawable/edit_text" />
-
-    <EditText
-        android:id="@+id/txtPresentacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtMarca"
-        android:layout_marginTop="14dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textColor="#000000"
-        android:textColorHint="#888888"
-        android:hint="Presentación"
-        android:inputType="text"
-        android:background="@android:drawable/edit_text" />
-
-    <EditText
-        android:id="@+id/txtPrecio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtPresentacion"
-        android:layout_marginTop="14dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textColor="#000000"
-        android:textColorHint="#888888"
-        android:hint="Precio ($)"
-        android:inputType="numberDecimal"
-        android:background="@android:drawable/edit_text" />
-
-    <LinearLayout
-        android:id="@+id/layoutFotos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtPrecio"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnFotoAnterior"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="◀"
-            android:textSize="16sp"
-            android:padding="0dp"
-            android:backgroundTint="#1565C0"
-            android:textColor="#FFFFFF" />
-
-        <ImageButton
-            android:id="@+id/imgFotoProducto"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:src="@android:drawable/ic_menu_camera"
-            android:background="@drawable/circulo_foto"
-            android:scaleType="centerCrop" />
-
-        <Button
-            android:id="@+id/btnFotoSiguiente"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="▶"
-            android:textSize="16sp"
-            android:padding="0dp"
-            android:backgroundTint="#1565C0"
-            android:textColor="#FFFFFF" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutBotonesFoto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutFotos"
-        android:layout_marginTop="4dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:paddingBottom="20dp"
+        tools:context=".MainActivity">
 
         <TextView
-            android:id="@+id/tvContadorFotos"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvTitulo"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="0 fotos"
-            android:textColor="#888888"
-            android:textSize="12sp"
-            android:layout_marginRight="16dp" />
+            android:text="Tienda"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#1565C0"
+            android:gravity="center"
+            android:layout_marginTop="16dp" />
+
+        <EditText
+            android:id="@+id/txtCodigo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitulo"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            android:hint="Código del producto"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/txtDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCodigo"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="Descripción" />
+
+        <EditText
+            android:id="@+id/txtMarca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDescripcion"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="Marca" />
+
+        <EditText
+            android:id="@+id/txtPresentacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtMarca"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="Presentación" />
+
+        <EditText
+            android:id="@+id/txtPrecio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtPresentacion"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="Precio ($)"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/txtCosto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtPrecio"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="Costo ($)"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/txtGanancia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCosto"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="Ganancia ($)"
+            android:inputType="numberDecimal"
+            android:enabled="false" /> <EditText
+        android:id="@+id/txtStock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtGanancia"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:hint="Stock"
+        android:inputType="number" />
+
+        <LinearLayout
+            android:id="@+id/layoutFotos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtStock"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnFotoAnterior"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:text="◀" />
+
+            <ImageButton
+                android:id="@+id/imgFotoProducto"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginHorizontal="10dp"
+                android:src="@android:drawable/ic_menu_camera"
+                android:scaleType="centerCrop" />
+
+            <Button
+                android:id="@+id/btnFotoSiguiente"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:text="▶" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvAgregarFoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutFotos"
+            android:layout_centerHorizontal="true"
             android:text="+ Agregar foto"
             android:textColor="#1565C0"
-            android:textSize="12sp" />
+            android:padding="10dp" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/btnGuardarProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvAgregarFoto"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Guardar Producto"
+            android:backgroundTint="#1565C0" />
 
-    <Button
-        android:id="@+id/btnGuardarProducto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutBotonesFoto"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Guardar Producto"
-        android:backgroundTint="#1565C0"
-        android:textColor="#FFFFFF" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabListaProductos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnGuardarProducto"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:src="@android:drawable/ic_menu_agenda"
+            app:backgroundTint="#1565C0" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabListaProductos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="20dp"
-        android:src="@android:drawable/ic_menu_agenda"
-        app:backgroundTint="#1565C0" />
-
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
